@@ -1,0 +1,9 @@
+#+TITLE: My ToDos
+#+AUTHOR: Li Chong
+#+EMAIL: lc@molasync.com
+
+* BUGS
+** DONE 收到邀请和申请时刷新
+- [X] 邀请
+- [X] 申请
+

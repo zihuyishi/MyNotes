@@ -1,0 +1,40 @@
+#+TITLE: MolaOcean new chatview
+#+AUTHOR: Li Chong
+#+EMAIL: lc@molasync.com
+#+KEYWORDS: chat
+#+TODO: TODO(t) | PROCESS(p) | DONE(d)
+* Views
+** Main Collection View
+*** Reuse Cell
+- 聊天消息 
+- 时间 
+- 顶部文件信息 
+- 通知
+*** Inputtool Bar
+- 输入框
+- 按钮 
+- 底部功能栏
+
+* Models
+** Message
+- [ ] 聊天消息
+- [ ] 通知
+** FileInfo
+
+* Business
+** TODO Recieve and send message
+** TODO Response to tap
+** TODO Play voice
+** TODO Show time
+time should belong to message?
+
+* Implement
+** TODO collectionView
+** TODO collectionViewLayout
+** TODO inputToolBar
+- [ ] UITextView :: should resize with content
+- [ ] Left and right button :: can custom
+- [ ] Bottom items :: show 
+** TODO reuse items
+- [ ] File or folder item :: show file detail
+- [ ] Notify :: show notify
