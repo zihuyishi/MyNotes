@@ -1,0 +1,10 @@
+#+TITLE: iOS App architect - VIPER
+#+AUTHOR: Saye
+#+EMAIL: zihuyishi@live.cn
+
+* What
+- V :: View
+- I :: Interactor
+- P :: Presenter
+- E :: Entity
+- R :: Routing

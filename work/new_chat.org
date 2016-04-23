@@ -12,6 +12,7 @@
 - 通知
 *** Inputtool Bar
 - 输入框
+  +根据文字调整大小
 - 按钮 
 - 底部功能栏
 
@@ -21,20 +22,43 @@
 - [ ] 通知
 ** FileInfo
 
-* Business
-** TODO Recieve and send message
-** TODO Response to tap
-** TODO Play voice
-** TODO Show time
-time should belong to message?
+* Events 
+** PROCESS MMOChatCollectionViewController
+- [ ] send message
+- [X] load more message
+- [ ] user tap message :: play voice, jump to file, etc.
+* DataFlow
+- get message :: MMCChatMessageSource -> MMOChatInteractor -> MMOChatViewPresenter -> MMOChatViewController
 
+- send message :: MMOChatViewController(button) -> MMOChatViewPresenter -> MMOChatInteractor -> MMCChatMessageSource
+
+- reference :: MMOMessagesTableViewController -> MMOChatWireframe -> MMOChatPresenter-> [MMOChatInteractor, MMOChatViewController]				  
+ 
 * Implement
-** TODO collectionView
-** TODO collectionViewLayout
-** TODO inputToolBar
+** PROCESS MMOChatCollectionViewController
+** PROCESS MMOChatViewLayout
+实现目标:
+- [X] 垂直方向滚动
+- [ ] 不同元素有不同的inset
+- [ ] 不同元素占有不同的高度
+
+** PROCESS MMOChatViewLayoutAttributes
+** PROCESS inputToolBar
+*** PROCESS MMOChatInputToolbarContentView
 - [ ] UITextView :: should resize with content
 - [ ] Left and right button :: can custom
-- [ ] Bottom items :: show 
+*** PROCESS MMOChatInputToolbarAdditionView
+- [ ] Bottom items :: show addition button 
 ** TODO reuse items
-- [ ] File or folder item :: show file detail
-- [ ] Notify :: show notify
+- [ ] File or folder item :: show file detail, Cell
+- [ ] Notify :: show notify, Cell
+- [ ] Chat message :: user's chat, Cell
+- [ ] Chat time :: time, SupplementaryView
+
+** PROCESS model
+now I think just use mola_message.
+
+** TODO chat viewmodel
+- [ ] item size
+
+** DONE viper

@@ -1,0 +1,62 @@
+#+TITLE: RUST ownership system
+#+AUTHOR: saye
+#+EMAIL: zihuyishi@live.cn
+* Borrowing
+** Rules
+1. Any borrow must last for a scope no greater than that of the owner.
+2. You may have one or the other of these tow kinds of borrows, but not both at the same time:
+   + one or more reference(&T) to a resource,
+   + exactly on mutable reference(&mut T).
+
+* Lifetime Elision
+** lifetime term
+*** input lifetime 
+#+BEGIN_SRC rust 
+    fn foo<'a>(bar: &'a str)
+#+END_SRC 
+*** output lifetime 
+#+BEGIN_SRC rust
+    fn foo<'a)() -> &'a str
+#+END_SRC
+*** both
+#+BEGIN_SRC rust
+    fn foo<'a>(bar: &'a str) -> &'a str 
+#+END_SRC
+   
+** elision rule
+- Each elided lifetime in a function’s arguments becomes a distinct lifetime parameter.
+
+- If there is exactly one input lifetime, elided or not, that lifetime is assigned to all elided lifetimes in the return values of that function.
+
+- If there are multiple input lifetimes, but one of them is &self or &mut self, the lifetime of self is assigned to all elided output lifetimes.
+
+** Examples
+
+#+BEGIN_SRC rust
+fn print(s: &str); // elided
+fn print<'a>(s: &'a str); // expanded
+
+fn debug(lvl: u32, s: &str); // elided
+fn debug<'a>(lvl: u32, s: &'a str); // expanded
+
+// In the preceding example, `lvl` doesn’t need a lifetime because it’s not a
+// reference (`&`). Only things relating to references (such as a `struct`
+// which contains a reference) need lifetimes.
+
+fn substr(s: &str, until: u32) -> &str; // elided
+fn substr<'a>(s: &'a str, until: u32) -> &'a str; // expanded
+
+fn get_str() -> &str; // ILLEGAL, no inputs
+
+fn frob(s: &str, t: &str) -> &str; // ILLEGAL, two inputs
+fn frob<'a, 'b>(s: &'a str, t: &'b str) -> &str; // Expanded: Output lifetime is ambiguous
+
+fn get_mut(&mut self) -> &mut T; // elided
+fn get_mut<'a>(&'a mut self) -> &'a mut T; // expanded
+
+fn args<T: ToCStr>(&mut self, args: &[T]) -> &mut Command; // elided
+fn args<'a, 'b, T: ToCStr>(&'a mut self, args: &'b [T]) -> &'a mut Command; // expanded
+
+fn new(buf: &mut [u8]) -> BufWriter; // elided
+fn new<'a>(buf: &'a mut [u8]) -> BufWriter<'a>; // expanded
+#+END_SRC
