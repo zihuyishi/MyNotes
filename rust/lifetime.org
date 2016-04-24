@@ -60,3 +60,12 @@ fn args<'a, 'b, T: ToCStr>(&'a mut self, args: &'b [T]) -> &'a mut Command; // e
 fn new(buf: &mut [u8]) -> BufWriter; // elided
 fn new<'a>(buf: &'a mut [u8]) -> BufWriter<'a>; // expanded
 #+END_SRC
+* Trait Objects
+Only traits that are object-safe can be made into trait objects.
+A trait is object-safe if both are true:
+- the trait does not require that Self: Sized
+- all of its methods are object-safe
+
+What makes a method object-save? Each method must require that Self: Sized or all of the following:
+- must not have any type parameters
+- must not use Self
