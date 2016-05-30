@@ -1,0 +1,17 @@
+#+TITLE: WKWebView
+
+* usage
+
+** WKUIDelegate
+WKWebView中js的alert、confirm、prompt方法不会弹出窗口，必须转化成iOS的回调方法
+因此如果js代码中需要弹窗口，需要实现该delegate的方法
+* tips
+** 设置UserAgent
+如下代码放在AppDelegate的didFinishLaunchingWithOptions(放在别的地方没用)
+#+BEGIN_SRC swift
+NSUserDefaults.standardUserDefaults().registerDefaults(["UserAgent" : "Custom Agent"])
+
+let userAgent = UIWebView().stringByEvaluatingJavaScriptFromString("navigator.userAgent")! + " Custom Agent"
+NSUserDefaults.standardUserDefaults().registerDefaults(["UserAgent" : userAgent])
+
+#+END_SRC

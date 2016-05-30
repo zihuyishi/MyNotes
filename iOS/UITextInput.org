@@ -1,0 +1,26 @@
+#+Title: UITextInput note
+#+Author: saye
+#+Email: zihuyishi@live.cn
+* Methods
+
+** Geometry and Hit-Testing Methods
+*** caretRectForPosition
+Return a rectangle used to draw the caret at a given insertion point.
+- example:
+  UITextView scroll to Bottom
+
+#+BEGIN_SRC objc
+- (void)scrollToBottomAnimated:(BOOL)animated {
+    CGRect rect = [self caretRectForPosition:self.selectedTextRange.end];
+    rect.size.height += self.textContainerInset.bottom;
+
+    if (animated) {
+        [self scrollRectToVisible:rect animated:animated];
+    }
+    else {
+        [UIView performWithoutAnimation:^{
+            [self scrollRectToVisible:rect animated:NO];
+        }];
+    }
+}
+#+END_SRC

@@ -36,29 +36,39 @@
  
 * Implement
 ** PROCESS MMOChatCollectionViewController
-** PROCESS MMOChatViewLayout
+** DONE MMOChatViewLayout
 实现目标:
 - [X] 垂直方向滚动
-- [ ] 不同元素有不同的inset
-- [ ] 不同元素占有不同的高度
+- [X] 不同元素有不同的inset
+- [X] 不同元素占有不同的高度
 
 ** PROCESS MMOChatViewLayoutAttributes
 ** PROCESS inputToolBar
-*** PROCESS MMOChatInputToolbarContentView
-- [ ] UITextView :: should resize with content
-- [ ] Left and right button :: can custom
+*** DONE MMOChatInputToolbarContentView
+- [X] UITextView :: should resize with content
+- [X] Left and right button :: can custom
 *** PROCESS MMOChatInputToolbarAdditionView
 - [ ] Bottom items :: show addition button 
-** TODO reuse items
-- [ ] File or folder item :: show file detail, Cell
-- [ ] Notify :: show notify, Cell
-- [ ] Chat message :: user's chat, Cell
+** PROCESS reuse items
+- [X] File or folder item :: show file detail, Cell
+- [X] Notify :: show notify, Cell
+- [X] Chat message :: user's chat, Cell
 - [ ] Chat time :: time, SupplementaryView
 
-** PROCESS model
+** DONE model
 now I think just use mola_message.
 
-** TODO chat viewmodel
-- [ ] item size
+** DONE chat viewmodel
+- [X] item size
 
 ** DONE viper
+** DONE audio
+*** player
+- [X] record
+tap record button -> eventHandler.playRecord() -> userInterface.recordPlayBegan()
+
+- [X] message audio
+tap message -> eventHandler.tapMessage() -> userInterface.playWithButton()
+
+- [X] play end
+palyer.delegate(eventHandler).playend() -> userInterface.playEnd()
